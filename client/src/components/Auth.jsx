@@ -11,6 +11,7 @@ const initialState = {
     username: '',
     password: '',
     confirmPassword: '',
+    email: '',
     phoneNumber: '',
     avatarURL: '',
 }
@@ -26,12 +27,12 @@ const Auth = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const {username, password, phoneNumber, avatarURL} = form;
+    const {username, password, email, phoneNumber, avatarURL} = form;
 
     const URL = 'http://localhost:5000/auth';
 
     const {data: {token, userId, hashedPassword, fullName}} = await axios.post(`${URL}/${isSignup ? 'signup' : 'login'}`, {
-      username, password, fullName: form.fullName, phoneNumber, avatarURL,
+      username, password, fullName: form.fullName, email, phoneNumber, avatarURL,
     })
 
     cookies.set('token', token);
@@ -40,6 +41,7 @@ const Auth = () => {
     cookies.set('userId', userId);
 
     if(isSignup) {
+      cookies.set('email', email);
       cookies.set('phoneNumber', phoneNumber);
       cookies.set('avatarURL', avatarURL);
       cookies.set('hashedPassword', hashedPassword);
@@ -81,6 +83,18 @@ return (
                               required
                           />
                       </div>
+                      {isSignup && (
+                      <div className="auth__form-container_fields-content_input">
+                          <label htmlFor="email">Email</label>
+                          <input 
+                              name="email" 
+                              type="text"
+                              placeholder="Email"
+                              onChange={handleChange}
+                              required
+                          />
+                      </div>
+                  )}
                   {isSignup && (
                       <div className="auth__form-container_fields-content_input">
                           <label htmlFor="phoneNumber">Phone Number</label>

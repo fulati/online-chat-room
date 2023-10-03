@@ -23,6 +23,7 @@ if (authToken) {
       fullName: cookies.get("fullName"),
       image: cookies.get("avatarURL"),
       hashedPassword: cookies.get("hashedPassword"),
+      email: cookies.get("email"),
       phoneNumber: cookies.get("phoneNumber"),
     },
     authToken
