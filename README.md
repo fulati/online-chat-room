@@ -6,4 +6,4 @@
 
 To run:
 1. "cd client", then "npm start"
-2. "cd server", then "npm run build
+2. "cd server", then "npm run dev"
